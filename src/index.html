@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+  <link href="assets/images/favicon.ico" rel="icon" />
+  <title>OllamaClient — .NET client for Ollama</title>
+  <meta name="description" content="OllamaClient is a .NET client library for Ollama with full REST API coverage, streaming, tool calling, structured outputs, multimodal support, and stateful chat.">
+  <meta name="author" content="Dev-Art-Solutions">
+
+  <!-- Stylesheet
+============================== -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css" />
+  <!-- Highlight Syntax -->
+  <link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
+</head>
+
+<body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!-- Preloader End -->
+
+  <!-- Document Wrapper
+=============================== -->
+  <div id="main-wrapper">
+
+    <!-- Header
+  ============================ -->
+    <header id="header" class="sticky-top">
+      <!-- Navbar -->
+      <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+        <div class="container-fluid">
+          <!-- Sidebar Toggler -->
+          <button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span
+              class="w-75"></span><span class="w-50"></span></button>
+
+          <!-- Logo -->
+          <a class="logo ml-md-3" href="index.html" title="OllamaClient"> <img src="assets/images/logo.png"
+              height="100px" alt="OllamaClient" /> </a>
+          <!-- Logo End -->
+
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+            data-target="#header-nav"><span></span><span></span><span></span></button>
+
+          <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li><a target="_blank" href="https://www.nuget.org/packages/OllamaClient/">NuGet</a></li>
+              <li><a target="_blank" href="https://github.com/Dev-Art-Solutions/OllamaClient">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar End -->
+    </header>
+    <!-- Header End -->
+
+    <!-- Content
+  ============================ -->
+    <div id="content" role="main">
+
+      <!-- Sidebar Navigation
+	============================ -->
+      <div class="idocs-navigation bg-dark docs-navigation-dark">
+        <ul class="nav flex-column ">
+          <li class="nav-item"><a class="nav-link active" href="#idocs_start">Getting Started</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#idocs_installation">Installation</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_quickstart">Quick Start</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_features">Features</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#idocs_streaming">Streaming chat</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_stateful">Stateful conversations</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_tools">Tool / function calling</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_structured">Structured outputs</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_multimodal">Multimodal / vision</a></li>
+              <li class="nav-item"><a class="nav-link" href="#idocs_embeddings">Embeddings</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_api">API surface</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_configuration">Configuration</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_compatibility">Compatibility</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_when">When to use</a></li>
+          <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link" href="#v2-0">v2.0.0</a></li>
+              <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0.0</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Docs Content
+	============================ -->
+      <div class="idocs-content">
+        <div class="container">
+
+          <!-- Getting Started
+		============================ -->
+          <section id="idocs_start">
+            <h1>OllamaClient</h1>
+            <p class="lead">A .NET client library for <a href="https://github.com/ollama/ollama" target="_blank">Ollama</a> — run large language models locally and integrate them into your C# applications with minimal boilerplate.</p>
+            <p>OllamaClient gives you full coverage of the Ollama REST API with first-class support for streaming, tool calling, structured outputs, multimodal vision models, and stateful multi-turn chat — all wired up through standard <code>IHttpClientFactory</code> and dependency injection.</p>
+            <p>
+              <a href="https://github.com/Dev-Art-Solutions/OllamaClient/actions/workflows/build-and-test.yml"
+                target="_blank">
+                <img src="https://github.com/Dev-Art-Solutions/OllamaClient/actions/workflows/build-and-test.yml/badge.svg"
+                  alt="build and test" />
+              </a>
+              &nbsp;
+              <a href="https://www.nuget.org/packages/OllamaClient/" target="_blank">
+                <img src="https://img.shields.io/nuget/v/OllamaClient.svg" alt="NuGet" />
+              </a>
+              &nbsp;
+              <a href="https://www.nuget.org/packages/OllamaClient/" target="_blank">
+                <img src="https://img.shields.io/nuget/dt/OllamaClient.svg" alt="Downloads" />
+              </a>
+            </p>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Installation
+		============================ -->
+          <section id="idocs_installation">
+            <h2>Installation</h2>
+            <p class="lead">Install OllamaClient via the .NET CLI:</p>
+            <pre><code class="bash">dotnet add package OllamaClient</code></pre>
+            <p>Or via the NuGet Package Manager Console:</p>
+            <pre><code class="bash">Install-Package <a href="https://www.nuget.org/packages/OllamaClient/" target="_blank">OllamaClient</a></code></pre>
+            <p>You also need a running <a href="https://ollama.com/download" target="_blank">Ollama</a> instance (defaults to <code>http://localhost:11434/</code>) with at least one model pulled, for example:</p>
+            <pre><code class="bash">ollama pull llama3.2</code></pre>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Quick Start
+		============================ -->
+          <section id="idocs_quickstart">
+            <h2>Quick Start</h2>
+            <p>Register the client through dependency injection, list available models, and stream a chat response:</p>
+            <pre><code class="csharp">using Microsoft.Extensions.DependencyInjection;
+using OllamaClient;
+using OllamaClient.Extensions;
+
+var services = new ServiceCollection()
+    .AddOllamaClient()          // defaults to http://localhost:11434/
+    .BuildServiceProvider();
+
+var client = services.GetRequiredService&lt;IOllamaHttpClient&gt;();
+
+// List available models
+var models = await client.GetModels(CancellationToken.None);
+
+// Streaming chat
+await foreach (var chunk in client.SendChat(new ChatStreamRequest
+{
+    Model = models.Models[0].Name,
+    Messages = [new Message { Role = "user", Content = "Hello!" }]
+}, CancellationToken.None))
+{
+    Console.Write(chunk.Message?.Content);
+}
+</code></pre>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Features
+		============================ -->
+          <section id="idocs_features">
+            <h2>Features</h2>
+
+            <h3 id="idocs_streaming">Streaming chat</h3>
+            <p>Every long-running endpoint exposes both a non-streaming and a streaming overload. The streaming overload returns an <code>IAsyncEnumerable&lt;T&gt;</code> you can iterate with <code>await foreach</code> — chunks arrive as the model produces them, with no manual NDJSON parsing required.</p>
+            <pre><code class="csharp">await foreach (var chunk in client.SendChat(new ChatStreamRequest
+{
+    Model = "llama3.2",
+    Messages = [new Message { Role = "user", Content = "Tell me a short story." }]
+}, ct))
+{
+    Console.Write(chunk.Message?.Content);
+}
+</code></pre>
+
+            <h3 id="idocs_stateful">Stateful conversations</h3>
+            <p><code>IStatefulConversationOllamaService</code> is a higher-level service that automatically tracks message history across turns, so you can write natural multi-turn chat without managing the <code>Messages</code> array yourself.</p>
+            <pre><code class="csharp">var conversation = services.GetRequiredService&lt;IStatefulConversationOllamaService&gt;();
+
+await conversation.SendMessage("llama3.2", "My name is Ada.", ct);
+var reply = await conversation.SendMessage("llama3.2", "What is my name?", ct);
+// reply remembers "Ada" — history is maintained automatically
+</code></pre>
+
+            <h3 id="idocs_tools">Tool / function calling</h3>
+            <p>Pass <code>Tool</code> definitions on a <code>ChatRequest</code> and OllamaClient surfaces any <code>ToolCall</code> emitted by the model, so you can dispatch to local handlers and feed the result back in the next turn.</p>
+            <pre><code class="csharp">var request = new ChatRequest
+{
+    Model = "llama3.2",
+    Messages = [new Message { Role = "user", Content = "What's the weather in Sofia?" }],
+    Tools =
+    [
+        new Tool
+        {
+            Type = "function",
+            Function = new FunctionDefinition
+            {
+                Name = "get_weather",
+                Description = "Get current weather for a city",
+                Parameters = /* JSON Schema */
+            }
+        }
+    ]
+};
+
+var response = await client.SendChat(request, ct);
+foreach (var call in response.Message.ToolCalls ?? [])
+{
+    // dispatch call.Function.Name with call.Function.Arguments
+}
+</code></pre>
+
+            <h3 id="idocs_structured">Structured outputs</h3>
+            <p>Set <code>Format</code> on <code>GenerateRequest</code> or <code>ChatRequest</code> to a JSON Schema object (or the literal string <code>"json"</code>) and the model is constrained to return matching JSON — ideal for extracting typed data.</p>
+            <pre><code class="csharp">var request = new GenerateRequest
+{
+    Model = "llama3.2",
+    Prompt = "Extract the city and country from: 'I live in Sofia, Bulgaria.'",
+    Format = new
+    {
+        type = "object",
+        properties = new
+        {
+            city = new { type = "string" },
+            country = new { type = "string" }
+        },
+        required = new[] { "city", "country" }
+    }
+};
+</code></pre>
+
+            <h3 id="idocs_multimodal">Multimodal / vision</h3>
+            <p>For vision-capable models (e.g. <code>llava</code>), populate <code>Message.Images</code> with base-64 encoded image bytes alongside your text prompt.</p>
+            <pre><code class="csharp">var bytes = await File.ReadAllBytesAsync("photo.jpg", ct);
+var request = new ChatRequest
+{
+    Model = "llava",
+    Messages =
+    [
+        new Message
+        {
+            Role = "user",
+            Content = "What is in this image?",
+            Images = [Convert.ToBase64String(bytes)]
+        }
+    ]
+};
+</code></pre>
+
+            <h3 id="idocs_embeddings">Embeddings</h3>
+            <p>Use <code>Embed(EmbedRequest)</code> against the modern <code>/api/embed</code> endpoint — it supports batch input and returns one vector per item.</p>
+            <pre><code class="csharp">var response = await client.Embed(new EmbedRequest
+{
+    Model = "nomic-embed-text",
+    Input = ["First chunk of text", "Second chunk of text"]
+}, ct);
+
+// response.Embeddings[i] is the vector for input[i]
+</code></pre>
+            <p class="text-muted"><small>The legacy <code>GetEmbeddings(EmbeddingsRequest)</code> wrapper around <code>/api/embeddings</code> is still present but marked <code>[Obsolete]</code> — migrate to <code>Embed</code>.</small></p>
+          </section>
+
+          <hr class="divider">
+
+          <!-- API surface
+		============================ -->
+          <section id="idocs_api">
+            <h2>API surface</h2>
+            <p>Every method on <code>IOllamaHttpClient</code> maps 1:1 to an endpoint in the official <a href="https://github.com/ollama/ollama/blob/main/docs/api.md" target="_blank">Ollama REST API</a>.</p>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr><th>Endpoint</th><th>Method</th><th>Streaming overload</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>GET /api/tags</code></td><td><code>GetModels()</code></td><td>—</td></tr>
+                  <tr><td><code>GET /api/version</code></td><td><code>GetVersion()</code></td><td>—</td></tr>
+                  <tr><td><code>GET /api/ps</code></td><td><code>GetRunningModels()</code></td><td>—</td></tr>
+                  <tr><td><code>POST /api/generate</code></td><td><code>Generate()</code></td><td><code>Generate(GenerateStreamRequest)</code></td></tr>
+                  <tr><td><code>POST /api/chat</code></td><td><code>SendChat()</code></td><td><code>SendChat(ChatStreamRequest)</code></td></tr>
+                  <tr><td><code>POST /api/create</code></td><td><code>Create()</code></td><td><code>Create(CreateModelStreamRequest)</code></td></tr>
+                  <tr><td><code>POST /api/copy</code></td><td><code>Copy()</code></td><td>—</td></tr>
+                  <tr><td><code>DELETE /api/delete</code></td><td><code>Delete()</code></td><td>—</td></tr>
+                  <tr><td><code>POST /api/show</code></td><td><code>Show()</code></td><td>—</td></tr>
+                  <tr><td><code>POST /api/pull</code></td><td><code>Pull()</code></td><td><code>Pull(PullStreamRequest)</code></td></tr>
+                  <tr><td><code>POST /api/push</code></td><td><code>Push()</code></td><td><code>Push(PushStreamRequest)</code></td></tr>
+                  <tr><td><code>POST /api/embed</code></td><td><code>Embed()</code></td><td>—</td></tr>
+                  <tr><td><code>POST /api/embeddings</code></td><td><code>GetEmbeddings()</code> <small class="text-muted">(obsolete)</small></td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Configuration
+		============================ -->
+          <section id="idocs_configuration">
+            <h2>Configuration</h2>
+
+            <h3>Default endpoint</h3>
+            <p>The plain <code>AddOllamaClient()</code> registration connects to <code>http://localhost:11434/</code>:</p>
+            <pre><code class="csharp">services.AddOllamaClient();</code></pre>
+
+            <h3>Custom base URL</h3>
+            <p>Point the client at a remote or non-default Ollama host:</p>
+            <pre><code class="csharp">services.AddOllamaClient(cfg =>
+{
+    cfg.OllamaEndpoint = "http://my-ollama-host:11434/";
+});</code></pre>
+
+            <h3>Timeout</h3>
+            <p>OllamaClient is built on top of <code>IHttpClientFactory</code>, so you can tune the underlying <code>HttpClient</code> using the standard <code>IHttpClientBuilder</code> — useful when pulling large models or running long generations:</p>
+            <pre><code class="csharp">services.AddOllamaClient();
+services.AddHttpClient&lt;OllamaHttpClient&gt;()
+        .ConfigureHttpClient(c => c.Timeout = TimeSpan.FromMinutes(5));</code></pre>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Compatibility
+		============================ -->
+          <section id="idocs_compatibility">
+            <h2>Compatibility</h2>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr><th>OllamaClient</th><th>.NET</th><th>Minimum Ollama</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>2.0.x</td><td>net9.0, net10.0</td><td>0.1.x</td></tr>
+                  <tr><td>1.0.x</td><td>net8.0</td><td>0.1.x</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <hr class="divider">
+
+          <!-- When to use
+		============================ -->
+          <section id="idocs_when">
+            <h2>When OllamaClient, when not</h2>
+
+            <h3>Good fit</h3>
+            <ul>
+              <li>.NET applications that want to talk to a local or self-hosted Ollama instance with no extra abstractions</li>
+              <li>On-premise, air-gapped, or privacy-sensitive deployments where data must not leave the network</li>
+              <li>Teams already on the modern .NET stack — DI, <code>IHttpClientFactory</code>, <code>IAsyncEnumerable</code></li>
+              <li>Apps that need full Ollama feature coverage: streaming, tool calling, structured JSON, vision, embeddings</li>
+            </ul>
+
+            <h3>Not a good fit</h3>
+            <ul>
+              <li>Applications that target hosted-only providers (OpenAI, Anthropic, Google) — use the relevant SDK instead</li>
+              <li>Workloads that need provider-agnostic LLM abstractions out of the box — consider a higher-level orchestration layer on top</li>
+              <li>Environments where you cannot run Ollama (or a compatible server) anywhere reachable from the app</li>
+            </ul>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Changelog
+		============================ -->
+          <section id="idocs_changelog">
+            <h2>Changelog</h2>
+            <p class="text-4">See what's new added, changed, fixed, improved or updated in the latest versions.</p>
+
+            <h3 id="v2-0">Version 2.0.0 <small class="text-muted">(31 May, 2026)</small></h3>
+            <ul class="changelog">
+              <li><span class="badge badge-success">Added</span> Multi-target support for <code>net9.0</code> and <code>net10.0</code>; <code>net8.0</code> support dropped.</li>
+              <li><span class="badge badge-success">Added</span> <code>IStatefulConversationOllamaService</code> — higher-level service that automatically manages conversation history for multi-turn chat sessions.</li>
+              <li><span class="badge badge-success">Added</span> Tool / function calling support: <code>Tool</code>, <code>FunctionDefinition</code>, <code>FunctionCall</code>, and <code>ToolCall</code> models; <code>ChatRequest.Tools</code> and <code>ChatRequest.ToolChoice</code> properties.</li>
+              <li><span class="badge badge-success">Added</span> Structured outputs — the <code>Format</code> property on <code>GenerateRequest</code> and <code>ChatRequest</code> now accepts a JSON Schema object in addition to the literal <code>"json"</code> string.</li>
+              <li><span class="badge badge-success">Added</span> Multimodal / vision support — <code>Message.Images</code> accepts a list of base-64-encoded image strings for vision models.</li>
+              <li><span class="badge badge-success">Added</span> <code>/api/embed</code> endpoint via <code>Embed(EmbedRequest)</code> — supports batch embedding, the modern alternative to <code>/api/embeddings</code>.</li>
+              <li><span class="badge badge-success">Added</span> <code>think</code> parameter on generate/chat requests and <code>Thinking</code> field on responses for reasoning models; <code>GenerateRequest.Suffix</code> for fill-in-the-middle generation.</li>
+              <li><span class="badge badge-success">Added</span> <code>GET /api/version</code> → <code>GetVersion()</code> and <code>GET /api/ps</code> → <code>GetRunningModels()</code>.</li>
+              <li><span class="badge badge-success">Added</span> XML documentation on all public types and members; documentation XML file emitted in release builds.</li>
+              <li><span class="badge badge-success">Added</span> Seven runnable sample projects: <code>BasicChat</code>, <code>StreamingChat</code>, <code>ToolCalling</code>, <code>StructuredOutput</code>, <code>Multimodal</code>, <code>Embeddings</code>, <code>MiniRag</code>.</li>
+              <li><span class="badge badge-info">Updated</span> All NuGet dependencies bumped to latest stable; GitHub Actions matrix expanded over .NET 9 and 10 with added format-check and pack steps.</li>
+              <li><span class="badge badge-info">Updated</span> <code>GenerateRequest.Context</code> type corrected from <code>string</code> to <code>int[]</code> to match the Ollama API spec.</li>
+              <li><span class="badge badge-warning">Deprecated</span> <code>GetEmbeddings(EmbeddingsRequest)</code> / <code>GetEmbeddingsAsync(EmbeddingsRequest)</code> — migrate to <code>Embed(EmbedRequest)</code> which uses the newer <code>/api/embed</code> endpoint.</li>
+              <li><span class="badge badge-danger">Fixed</span> <code>DELETE /api/delete</code> now uses HTTP <code>DELETE</code> instead of <code>POST</code>, matching the Ollama API spec.</li>
+              <li><span class="badge badge-danger">Fixed</span> NuGet package icon inclusion changed to <code>None Remove</code> + <code>None Include</code> with empty <code>PackagePath</code>, fixing <code>NU5046</code> pack error under .NET 10 SDK.</li>
+            </ul>
+
+            <hr class="divider">
+
+            <h3 id="v1-0">Version 1.0.0 <small class="text-muted">(22 April, 2024)</small></h3>
+            <p>Initial public release — <code>IOllamaHttpClient</code> with full Ollama REST API coverage: generate, chat (streaming and non-streaming), create model, copy, delete, show, pull, push, embeddings, list models. DI integration via <code>AddOllamaClient()</code> extension method. Configurable base URL via <code>OllamaConfiguration</code>.</p>
+          </section>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- Content end -->
+
+    <!-- Footer
+  ============================ -->
+    <footer id="footer" class="section bg-dark footer-text-light">
+      <div class="container">
+      </div>
+    </footer>
+    <!-- Footer end -->
+
+  </div>
+  <!-- Document Wrapper end -->
+
+  <!-- Back To Top -->
+  <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i
+      class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript
+============================ -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Highlight JS -->
+  <script src="assets/vendor/highlight.js/highlight.min.js"></script>
+  <!-- Easing -->
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <!-- Magnific Popup -->
+  <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <!-- Custom Script -->
+  <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
